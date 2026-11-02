@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- SEO & Metatags -->
+    <title>Dra. Elena Vasconcelos | Harmonização Facial em São Paulo</title>
+    <meta name="description" content="Harmonização facial com técnica refinada, olhar artístico e resultado natural em São Paulo. Agende sua avaliação personalizada com a Dra. Elena Vasconcelos." />
+    <meta name="keywords" content="harmonização facial, preenchimento labial, botox, preenchimento de olheira, full face, bioestimulador, são paulo, estética facial natural" />
+    <meta name="author" content="Dra. Elena Vasconcelos" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Dra. Elena Vasconcelos - Harmonização Facial" />
+    <meta property="og:title" content="Dra. Elena Vasconcelos | Harmonização Facial em São Paulo" />
+    <meta property="og:description" content="Harmonização facial com técnica refinada, olhar artístico e resultado natural. Rejuvenescer sem perder quem você é." />
+    <meta property="og:image" content="/img/doutora.webp" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dra. Elena Vasconcelos | Harmonização Facial em São Paulo" />
+    <meta name="twitter:description" content="Harmonização facial com técnica refinada, olhar artístico e resultado natural. Rejuvenescer sem perder quem você é." />
+    <meta name="twitter:image" content="/img/doutora.webp" />
+
+    <!-- Favicon & Touch Icon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23FCFAF5' stroke='%23B8924A' stroke-width='4'/><path d='M50 20 C65 45 80 60 80 72 C80 88 66 94 50 94 C34 94 20 88 20 72 C20 60 35 45 50 20 Z' fill='%23B8924A'/></svg>" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet" />
+
+    <!-- External Libraries (CDNs) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/styles.css" />
+
+    <!-- Schema.org Structured Data: Physician & FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Physician",
+          "@id": "https://draelenavasconcelos.com.br/#physician",
+          "name": "Dra. Elena Vasconcelos",
+          "description": "Cirurgiã-dentista especialista em harmonização facial de alta precisão, preenchimento labial, botox e full face em São Paulo.",
+          "image": "/img/doutora.webp",
+          "medicalSpecialty": "Dentistry",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Av. Brigadeiro Faria Lima, 3477 - Conj. 112",
+            "addressLocality": "São Paulo",
+            "addressRegion": "SP",
+            "postalCode": "04538-133",
+            "addressCountry": "BR"
+          },
+          "telephone": "+5511998765432",
+          "openingHours": "Mo-Fr 08:30-19:00, Sa 09:00-14:00",
+          "sameAs": [
+            "https://instagram.com/draelenavasconcelos"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://draelenavasconcelos.com.br/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Fico com aspecto artificial?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Não. Nossa filosofia clínica é pautada na naturalidade e na harmonia facial. Trabalhamos com microdoses e técnicas anatômicas para que o resultado realce sua beleza sem que ninguém perceba que houve procedimento."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quanto tempo dura o resultado?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "O ácido hialurônico costuma durar entre 10 e 18 meses, variando de acordo com a região tratada, o metabolismo individual e o estilo de vida. O botox tem durabilidade estimada de 3 a 5 meses."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "O procedimento dói?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "O desconforto é muito baixo e totalmente suportável. Utilizamos anestésicos tópicos hospitalares de alta performance e os produtos já contêm anestésico (lidocaína) na própria fórmula."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Qual o tempo de recuperação (downtime)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Praticamente imediato. Pode ocorrer leve edema ou sensibilidade passageira que regride entre 24 e 48 horas. É possível retomar suas tarefas normais no mesmo dia."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Barra de progresso dourada no topo -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Cursor customizado desktop -->
+    <div class="cursor-dot" id="cDot" aria-hidden="true"></div>
+    <div class="cursor-follower" id="cFollow" aria-hidden="true"></div>
+
+    <!-- 1. Navegação em pílula de vidro flutuante -->
+    <header>
+      <nav class="nav-pill glass" aria-label="Navegação principal">
+        <a href="#hero" class="nav-brand" id="navBrand">Dra. Elena Vasconcelos</a>
+        
+        <ul class="nav-links">
+          <li><a href="#s2">Transformação</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#estudio">Espaço</a></li>
+          <li><a href="#faq">Dúvidas</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Menu Cortina Mobile em tela cheia -->
+    <div class="mobile-curtain" id="mobileCurtain" aria-hidden="true">
+      <ul class="mobile-links">
+        <li><a href="#hero" class="m-link">Início</a></li>
+        <li><a href="#s2" class="m-link">Transformação</a></li>
+        <li><a href="#servicos" class="m-link">Serviços</a></li>
+        <li><a href="#galeria" class="m-link">Galeria de Resultados</a></li>
+        <li><a href="#sobre" class="m-link">Sobre a Doutora</a></li>
+        <li><a href="#feedbacks" class="m-link">Depoimentos</a></li>
+        <li><a href="#estudio" class="m-link">O Estúdio</a></li>
+        <li><a href="#faq" class="m-link">Dúvidas Frequentes</a></li>
+      </ul>
+      <a href="#agendar" class="btn m-link">Agendar Minha Avaliação</a>
+    </div>
+
+    <!-- WhatsApp Flutuante com pulso -->
+    <a href="#" id="waFloat" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.12c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31c-.82-1.31-1.26-2.83-1.26-4.41 0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 012.41 5.83c0 4.55-3.7 8.26-8.25 8.26zm4.52-6.18c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.07-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29z"/>
+      </svg>
+    </a>
+
+    <main>
+      <!-- 2. Hero Section -->
+      <section id="hero" class="hero">
+        <div class="in">
+          <div class="hero-text rv">
+            <h1 id="heroTitulo">
+              Rejuvenescer sem perder <span class="au">quem você é.</span>
+            </h1>
+
+            <p class="sub" id="heroSubtitulo">
+              Harmonização facial com técnica refinada, olhar artístico e resultado natural, em São Paulo.
+            </p>
+
+            <div class="hero-ctas">
+              <a href="#agendar" class="btn" id="heroBtnAgendar">Agendar minha avaliação</a>
+              <a href="#servicos" class="btn o">Ver serviços</a>
+            </div>
+          </div>
+
+          <!-- Foto da Doutora no Hero com borda dourada fina -->
+          <div class="doc rv" id="heroDoc">
+            <div class="doc__photo" style="--foto: url('/img/doutora.webp');" role="img" aria-label="Foto de perfil da Dra. Elena Vasconcelos"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Faixa Dourada com brilho espelhado -->
+      <div class="band" aria-hidden="true">
+        <div class="band__t" id="bandTrack">
+          <!-- Preenchido via config.js -->
+        </div>
+      </div>
+
+      <!-- 4. Animação da Gota (Sessão 8.3) -->
+      <section id="s2">
+        <div class="stg" id="stg">
+          <div class="tx">
+            <h2 id="gotaTitulo">Uma gota, e a pele <span class="au">recupera o viço</span></h2>
+            <p class="sub" id="gotaSubtitulo">Role e veja o ácido hialurônico agir. Cada região do rosto pede uma técnica, e o plano é feito sob medida para você.</p>
+            <div class="btn-group">
+              <a class="btn" href="#servicos">Ver serviços</a>
+              <a class="btn o" href="#agendar">Agendar avaliação</a>
+            </div>
+          </div>
+
+          <div class="orbit" id="orbit">
+            <svg class="rsvg" viewBox="0 0 400 400" aria-hidden="true">
+              <defs>
+                <path id="rp" d="M200,200 m-185,0 a185,185 0 1,1 370,0 a185,185 0 1,1 -370,0"/>
+              </defs>
+              <circle cx="200" cy="200" r="164"/>
+              <text><textPath href="#rp" textLength="1150" lengthAdjust="spacing" id="orbitText">FULL FACE ✦ PREENCHIMENTO LABIAL ✦ PREENCHIMENTO DE MENTO ✦ BOTOX ✦ PREENCHIMENTO DE OLHEIRA ✦ </textPath></text>
+            </svg>
+            <div class="circ" id="circ" role="img" aria-label="Rosto antes e depois da harmonização facial">
+              <div class="ph"></div>
+              <div class="ph y" id="yc"></div>
+              <i id="front"></i>
+              <span class="lb glass" id="lb">Antes</span>
+            </div>
+          </div>
+
+          <svg id="fx" aria-hidden="true">
+            <defs>
+              <radialGradient id="gg" cx="0.35" cy="0.3" r="0.9">
+                <stop offset="0%" stop-color="#fff"/>
+                <stop offset="45%" stop-color="#F7E6B0"/>
+                <stop offset="100%" stop-color="#CFA650"/>
+              </radialGradient>
+              <filter id="ds" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#8A6A2E" flood-opacity="0.35"/>
+              </filter>
+            </defs>
+            <path id="hang" fill="url(#gg)" stroke="#fff" stroke-opacity="0.85" stroke-width="1.5" filter="url(#ds)"/>
+            <path id="fall" fill="url(#gg)" stroke="#fff" stroke-opacity="0.85" stroke-width="1.5" filter="url(#ds)"/>
+            <ellipse id="hl" fill="#fff" opacity="0.8"/>
+          </svg>
+
+          <div id="rip" aria-hidden="true">
+            <i style="--m:220"></i>
+            <i style="--m:380"></i>
+            <i style="--m:560"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Serviços com maré de gotas -->
+      <section id="servicos" class="sec svs">
+        <div class="tide" id="tide" aria-hidden="true">
+          <svg viewBox="0 0 1440 150" preserveAspectRatio="none"><path d="M0 70Q90 20 180 70T360 70T540 70T720 70T900 70T1080 70T1260 70T1440 70V150H0Z" fill="rgba(232,211,160,.35)"/></svg>
+          <svg viewBox="0 0 1440 150" preserveAspectRatio="none"><path d="M0 90Q90 50 180 90T360 90T540 90T720 90T900 90T1080 90T1260 90T1440 90V150H0Z" fill="rgba(240,223,174,.6)"/></svg>
+          <svg viewBox="0 0 1440 150" preserveAspectRatio="none"><path d="M0 112Q90 80 180 112T360 112T540 112T720 112T900 112T1080 112T1260 112T1440 112V150H0Z" fill="#FCFAF5"/></svg>
+        </div>
+        <div id="dps"></div>
+
+        <div class="sec-head rv">
+          <h2>Nossos <span class="au">serviços</span></h2>
+          <p>Toque em um procedimento para conhecer a técnica e os benefícios anatômicos.</p>
+        </div>
+
+        <div class="services-grid" id="sv"></div>
+
+        <div class="services-ctas rv">
+          <button type="button" class="btn o" id="btnMaisServicos">Conhecer mais serviços</button>
+          <a href="#agendar" class="btn">Agendar avaliação</a>
+        </div>
+      </section>
+
+      <!-- 6. Galeria Estática -->
+      <section id="galeria" class="sec-galeria">
+        <div class="sec-head rv">
+          <h2>O cuidado, em cada <span class="au">detalhe</span></h2>
+          <p>Rostos reais, resultados naturais, sempre com autorização expressa das pacientes.</p>
+        </div>
+
+        <div class="gal rv" id="galeriaGrid"></div>
+
+        <div class="services-ctas rv">
+          <a href="#agendar" class="btn">Agendar minha avaliação</a>
+        </div>
+      </section>
+
+      <!-- Lightbox Modal da Galeria -->
+      <div class="lightbox" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Visualização ampliada da foto">
+        <div class="lightbox-content">
+          <button class="lightbox-close" id="lightboxClose" aria-label="Fechar visualização">&times;</button>
+          <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Foto anterior">&#10094;</button>
+          <img src="" alt="" id="lightboxImg" />
+          <button class="lightbox-nav next" id="lightboxNext" aria-label="Próxima foto">&#10095;</button>
+        </div>
+      </div>
+
+      <!-- 7. Sobre a Profissional -->
+      <section id="sobre" class="sec-sobre">
+        <div class="sec-head rv">
+          <h2 id="sobreTitulo">Beleza é única. <span class="au">O cuidado também.</span></h2>
+          <p id="sobreSubtitulo">Conheça a Dra. Elena Vasconcelos, especialista em harmonização facial em São Paulo.</p>
+        </div>
+
+        <div class="sobre-grid">
+          <!-- Foto da Doutora no Sobre com flutuação sutil -->
+          <div class="doc rv" id="sobreDoc">
+            <div class="doc__photo" style="--foto: url('/img/doutora2.webp');" role="img" aria-label="Dra. Elena Vasconcelos em consultório"></div>
+          </div>
+
+          <!-- Quadrado elegante com o conteúdo sobre a profissional -->
+          <div class="sobre-card rv">
+            <div class="sobre-pills-row" id="sobrePills">
+              <!-- Cards sutis preenchidos via config.js -->
+            </div>
+
+            <div class="quote-box">
+              <span class="quote-line"></span>
+              <blockquote>
+                “<span id="sobreFraseInicio">Meu trabalho não é mudar você. </span><span class="au" id="sobreFraseDestaque">É revelar a melhor versão do que já é seu.</span>”
+              </blockquote>
+            </div>
+
+            <p id="sobreEmocional"></p>
+            <p id="sobreTecnico"></p>
+
+            <div class="counters-row" id="countersRow">
+              <div class="counter-item">
+                <div class="counter-num" data-count="5" data-suf="+">0</div>
+                <div class="counter-label">anos de experiência</div>
+              </div>
+              <div class="counter-item">
+                <div class="counter-num" data-count="800" data-suf="+">0</div>
+                <div class="counter-label">pacientes atendidas</div>
+              </div>
+              <div class="counter-item">
+                <div class="counter-num" data-count="5" data-suf=".0">0</div>
+                <div class="counter-label">avaliação média</div>
+              </div>
+            </div>
+
+            <div>
+              <a href="#agendar" class="btn" id="sobreBtnAgendar">Agendar com a Dra. Elena</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Instagram com Reels integrado sem capa -->
+      <section id="instagram" class="sec-insta">
+        <div class="sec-head rv">
+          <h2>Acompanhe o dia a dia no <span class="au">Instagram</span></h2>
+          <p>Bastidores, cuidados e resultados reais, sem sair daqui.</p>
+        </div>
+
+        <div class="phone-mockup-wrapper rv">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <video id="reel" autoplay muted loop playsinline preload="metadata" aria-label="Vídeo de bastidores da Dra. Elena Vasconcelos">
+                <source src="/img/reel.mp4" type="video/mp4" />
+                Seu navegador não suporta a reprodução de vídeo.
+              </video>
+              <button class="sound-btn" id="sound" aria-label="Ligar ou desligar som">
+                <svg id="soundIcon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                </svg>
+              </button>
+              <div class="insta-overlay-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.13-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <span>@draelenavasconcelos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="services-ctas rv">
+          <a href="https://instagram.com/draelenavasconcelos" id="btnInsta" target="_blank" rel="noopener noreferrer" class="btn o">Seguir @draelenavasconcelos no Instagram</a>
+          <a href="#agendar" class="btn">Agendar avaliação</a>
+        </div>
+      </section>
+
+      <!-- 9. Feedbacks -->
+      <section id="feedbacks" class="sec-feedbacks">
+        <div class="sec-head rv">
+          <h2>Quem confiou, <span class="au">voltou a se amar</span></h2>
+          <p>Relatos de pacientes sobre o cuidado, a escuta atenta e os resultados alcançados.</p>
+        </div>
+
+        <div class="carousel-container rv">
+          <div class="carousel-track" id="fbTrack">
+            <!-- Preenchido via config.js -->
+          </div>
+          
+          <div class="carousel-nav-row">
+            <button class="carousel-arrow" id="fbPrev" aria-label="Depoimento anterior">&#10094;</button>
+            <button class="carousel-arrow" id="fbNext" aria-label="Próximo depoimento">&#10095;</button>
+          </div>
+        </div>
+
+        <div class="services-ctas rv">
+          <a href="#agendar" class="btn">Marcar minha avaliação</a>
+        </div>
+      </section>
+
+      <!-- 10. Estúdio e Localização -->
+      <section id="estudio" class="sec-estudio">
+        <div class="sec-head rv">
+          <h2>Um espaço pensado para o seu <span class="au">bem-estar</span></h2>
+          <p>Privacidade, conforto e biossegurança em cada detalhe da sua visita.</p>
+        </div>
+
+        <div class="estudio-carousel-wrapper rv" id="estudioWrapper">
+          <div class="estudio-marquee" id="estudioMarquee" aria-label="Carrossel contínuo de fotos do espaço clínico">
+            <div class="estudio-track" id="estudioTrack">
+              <!-- Preenchido via config.js -->
+            </div>
+          </div>
+        </div>
+
+        <div class="location-card glass rv">
+          <div class="map-frame">
+            <iframe id="mapsEmbed" src="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localização no Google Maps"></iframe>
+          </div>
+
+          <div class="location-info">
+            <h3>Como chegar</h3>
+            <p class="address" id="estudioEndereco"></p>
+            <p class="hours" id="estudioHorario"></p>
+
+            <div class="location-tips">
+              ✦ Estacionamento privativo com manobrista no local<br>
+              ✦ Edifício corporativo com controle de acesso e acessibilidade total<br>
+              ✦ Próximo ao Shopping Iguatemi e Av. Faria Lima
+            </div>
+
+            <div class="route-buttons">
+              <a href="#" id="linkMaps" target="_blank" rel="noopener noreferrer" class="route-btn">Abrir no Google Maps</a>
+            </div>
+
+            <a href="#agendar" class="btn">Agendar minha visita</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. Atendimento (Educativa) -->
+      <section id="atendimento" class="sec-atendimento">
+        <div class="sec-head rv">
+          <h2>Seu atendimento começa <span class="au">antes da consulta</span></h2>
+          <p>Em poucos passos, nossa equipe entende o que te incomoda e prepara o melhor plano.</p>
+        </div>
+
+        <div class="timeline-box rv" id="tlBox">
+          <svg class="timeline-svg" viewBox="0 0 4 600" preserveAspectRatio="none" aria-hidden="true">
+            <path id="tlPath" d="M2,0 L2,600" />
+          </svg>
+
+          <div class="timeline-step">
+            <div class="step-marker">1</div>
+            <div class="step-card">
+              <h3>Conte o que incomoda</h3>
+              <p>Com suas próprias palavras, sem pressa. Fale sobre o que você nota no espelho, fotografias ou momentos em que sente perda de firmeza ou cansaço.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-marker">2</div>
+            <div class="step-card">
+              <h3>Envie uma foto (guia fotográfico)</h3>
+              <p>Para uma pré-análise acolhedora antes do encontro:</p>
+              <div class="step-guide-box">
+                ✦ Luz natural frontal (de frente para uma janela)<br>
+                ✦ Rosto limpo, sem maquiagem e cabelo preso<br>
+                ✦ 3 ângulos: frontal neutro, perfil direito e perfil esquerdo<br>
+                ✦ Uma foto com expressão neutra e outra sorrindo
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-marker">3</div>
+            <div class="step-card">
+              <h3>Receba a orientação inicial da equipe</h3>
+              <p>Nossa equipe médica avalia a viabilidade, esclarece dúvidas de repouso e organiza o horário mais confortável para sua consulta.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-marker">4</div>
+            <div class="step-card">
+              <h3>Venha para a avaliação presencial</h3>
+              <p>Mapeamento facial completo, teste de mímica muscular e plano individualizado com produtos certificados e segurança anatômica.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="expectativas-box rv">
+          <strong>Compromisso ético:</strong> O objetivo da harmonização é realçar sua beleza natural, e não transformá-la em outra pessoa. Tratamentos bem-sucedidos são planejados em etapas seguras.
+        </div>
+
+        <div class="services-ctas rv">
+          <a href="#agendar" class="btn">Enviar minha foto para análise</a>
+        </div>
+      </section>
+
+      <!-- 12. Agendamento: Simulador e Formulário -->
+      <section id="agendar" class="sec-agendamento">
+        <div class="sec-head rv">
+          <h2>Veja o que você quer <span class="au">realçar</span></h2>
+          <p>Toque nas opções e veja uma simulação ilustrativa. Depois monte sua mensagem e fale com a equipe.</p>
+        </div>
+
+        <!-- Simulador Facial Interativo -->
+        <div class="sim-container rv">
+          <div class="sim" id="sim">
+            <div class="lay"></div>
+            <div class="scn" id="scanLine"></div>
+          </div>
+          <p class="sim-subtle-note"><span class="dot">✦</span> A simulação é ilustrativa. O resultado real é definido na avaliação.</p>
+
+          <div class="sim-controls">
+            <div class="sim-opts" id="simOpts"></div>
+            <div class="sim-slider-row">
+              <span>Intensidade:</span>
+              <input type="range" id="simIntensity" min="20" max="100" value="90" aria-label="Intensidade da simulação" />
+              <span id="simVal">90%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário com Prévia Live no WhatsApp -->
+        <div class="booking-grid rv">
+          <div class="form-box glass">
+            <h3>Agende sua avaliação</h3>
+            <p class="form-sub">Preencha os campos abaixo para gerar sua mensagem personalizada direta no WhatsApp.</p>
+
+            <form id="bookingForm" novalidate>
+              <div class="form-group" id="grpNome">
+                <label for="formNome">Seu nome completo *</label>
+                <input type="text" id="formNome" placeholder="Como podemos te chamar?" required />
+                <span class="field-error">Por favor, informe seu nome para contato.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="formServico">Procedimento de interesse</label>
+                <select id="formServico">
+                  <!-- Preenchido via config.js -->
+                </select>
+              </div>
+
+              <div class="form-group" id="grpData">
+                <label for="formData">Dia de preferência</label>
+                <input type="date" id="formData" aria-label="Escolher data de preferência" />
+              </div>
+
+              <div class="form-group">
+                <label for="formHorario">Melhor período para atendimento</label>
+                <select id="formHorario">
+                  <option value="Manhã (08h30 às 12h)">Manhã (08h30 às 12h)</option>
+                  <option value="Tarde (13h às 18h)" selected>Tarde (13h às 18h)</option>
+                  <option value="Noite / Final do dia">Final da tarde / Início da noite</option>
+                  <option value="Sábados">Sábados (09h às 14h)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="formQueixa">O que mais te incomoda hoje?</label>
+                <textarea id="formQueixa" rows="3" placeholder="Ex: Sinto que pareço cansada pelas olheiras, ou gostaria de mais contorno nos lábios..."></textarea>
+              </div>
+
+              <div class="form-photo-hint">
+                <span class="hint-badge">📸 Pré-análise:</span>
+                <span class="hint-text">Você pode enviar fotos do seu rosto (de frente e perfil) no WhatsApp após o envio para uma pré-avaliação personalizada.</span>
+              </div>
+
+              <div class="form-buttons">
+                <button type="button" class="btn btn-send" id="btnSendWa">Enviar pelo WhatsApp</button>
+                <button type="button" class="btn-copy" id="btnCopyMsg">Copiar mensagem</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Balão Live do WhatsApp -->
+          <div class="wa-preview-box glass">
+            <h4>Pré-visualização da sua mensagem</h4>
+            <div class="chat-bubble">
+              <p id="waPreviewText" aria-live="polite"></p>
+              <div class="meta">
+                <span id="previewTime">10:30</span>
+                <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M11.07 1L5.5 6.57L4.43 5.5L3.36 6.57L5.5 8.71L12.14 2.07L11.07 1Z" fill="#53BDEB"/><path d="M14.57 1L9 6.57L8.64 6.21L7.57 7.28L9 8.71L15.64 2.07L14.57 1Z" fill="#53BDEB"/></svg>
+              </div>
+            </div>
+            <p style="font-size: 13px; color: var(--soft); text-align: center;">
+              Mensagem segura e direta para o WhatsApp oficial da clínica. Sem robôs, você falará com nossa equipe de atendimento.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13. FAQ -->
+      <section id="faq" class="sec-faq">
+        <div class="sec-head rv">
+          <h2>Dúvidas <span class="au">frequentes</span></h2>
+          <p>Respostas transparentes sobre segurança, procedimentos e recuperação.</p>
+        </div>
+
+        <div class="faq-container rv" id="faqAccordion">
+          <!-- Preenchido via config.js -->
+        </div>
+
+        <div class="services-ctas rv">
+          <a href="#" id="btnFaqWa" class="btn">Tirar minhas dúvidas no WhatsApp</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- 14. Rodapé -->
+    <footer class="footer">
+      <div class="footer-in">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <h3 class="au" id="footerNome">Dra. Elena Vasconcelos</h3>
+            <div class="reg" id="footerRegistro">CRO/SP 114.892</div>
+            <p>Harmonização facial com técnica refinada, olhar artístico e resultado natural. Respeito à sua anatomia e história.</p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Procedimentos</h4>
+            <ul>
+              <li><a href="#servicos">Preenchimento Labial</a></li>
+              <li><a href="#servicos">Preenchimento de Mento</a></li>
+              <li><a href="#servicos">Full Face Harmonização</a></li>
+              <li><a href="#servicos">Toxina Botulínica (Botox)</a></li>
+              <li><a href="#servicos">Preenchimento de Olheira</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Navegação</h4>
+            <ul>
+              <li><a href="#s2">Transformação</a></li>
+              <li><a href="#galeria">Casos Clínicos</a></li>
+              <li><a href="#sobre">Sobre a Doutora</a></li>
+              <li><a href="#estudio">Nosso Espaço</a></li>
+              <li><a href="#faq">Perguntas Frequentes</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Contato & Endereço</h4>
+            <ul>
+              <li id="footerEndereco">Av. Brigadeiro Faria Lima, 3477</li>
+              <li id="footerHorario">Segunda a Sexta: 08h30 às 19h</li>
+              <li><a href="#" id="footerWaLink" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp</a></li>
+              <li><a href="#" id="footerInstaLink" target="_blank" rel="noopener noreferrer">Instagram Oficial</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="footer-disclaimer">
+            Resultados variam de pessoa para pessoa. Este site não substitui avaliação clínica presencial. Todos os procedimentos são realizados com produtos com registro na ANVISA e em estrita conformidade com as normas dos conselhos de classe da saúde (CFO / CRM).
+          </p>
+          <p class="footer-copy">
+            &copy; <span id="copyYear">2026</span> Dra. Elena Vasconcelos. Todos os direitos reservados.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toastMsg" role="status" aria-live="polite">Mensagem copiada para a área de transferência!</div>
+
+    <!-- Script Principal -->
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

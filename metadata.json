@@ -1,0 +1,6 @@
+{
+  "name": "Dra. Elena Vasconcelos - Harmonização Facial",
+  "description": "Site modelo premium para profissionais de harmonização facial com animação da gota de ácido hialurônico, simulador facial interativo e agendamento qualificado via WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

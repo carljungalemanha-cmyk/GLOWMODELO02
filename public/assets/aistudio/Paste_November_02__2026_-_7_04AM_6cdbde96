@@ -1,0 +1,410 @@
+PRD completo: site modelo para harmonizadoras faciais (versão gota)
+Documento para o Google AI Studio construir o site. É o site das clientes (profissionais da harmonização facial), um esqueleto reutilizável que muda só o conteúdo por doutora. 
+O AI Studio deve seguir as decisões fechadas, a estrutura e os códigos como ponto de partida e melhorar: mais refinamento, mais fluidez e mais acabamento.
+0. Decisões fechadas (não alterar)
+1. Paleta: bege claríssimo e cinza claro, alternando entre as sessões, com detalhes em dourado elegante com efeito espelhado. Texto em grafite. Nenhum marrom.
+2. Sem varinha. A assinatura do site é a gota de ácido hialurônico (sessão 8.3).
+3. Ordem das sessões: Hero, faixa dourada, animação da gota (transformação), serviços, galeria, sobre a profissional (com frase entre aspas), Instagram, feedbacks, estúdio e localização, atendimento (educativa), agendamento (simulador e formulário), FAQ e rodapé.
+4. Hero: título impactante, cargos da doutora, subtítulo, cartões e a foto da doutora ao lado. Sem esboço grátis e sem nada da Glow.
+5. Gota: nasce grudada na divisão entre o hero e a sessão 2, cai no rosto da mulher, e o rosto se transforma (envelhecido para rejuvenescido) a partir do ponto de impacto. As duas fotos ficam dentro de um círculo, com um anel de palavras girando em volta com os serviços.
+6. Serviços: apenas 5 (preenchimento labial, preenchimento de mento, full face, botox, preenchimento de olheira) e o botão Conhecer mais serviços. Cada um com foto, nome, descrição e benefícios que abrem ao clicar.
+7. Galeria estática. Sem animação especial e sem comparador de antes e depois.
+8. Sem quiz. O simulador em estilo de aplicativo fica na sessão de agendamento.
+9. Mobile first: no hero a foto da doutora vem antes do texto, e na sessão da gota o círculo vem antes do texto.
+10. Toda sessão tem título, subtítulo e um botão de agendar (#agendar), exceto o rodapé. O WhatsApp flutuante acompanha a página toda.
+1. Objetivo e público
+Site premium e reutilizável (valor percebido de R$ 2.000 a R$ 2.500) que transforma visitas em mensagens qualificadas no WhatsApp da doutora, com serviço, horário e queixa já preenchidos. Público: mulheres de 28 a 60 anos, a maioria no celular vinda do Instagram. Mobile first. Voz: elegante, acolhedora, segura e sem promessas absurdas. Copy que cria desejo e autoridade e leva ao agendamento.
+2. Sistema visual
+2.1 Tokens
+:root{
+  --bg:#FCFAF5;        /* bege claríssimo */
+  --bg-2:#EFEFEC;      /* cinza claro */
+  --bg-sky:#E6EAEA;    /* cinza azulado do topo do hero */
+  --ink:#2D2B28;       /* grafite, texto */
+  --soft:#7A7872;      /* cinza médio, texto de apoio */
+  --gold:#B8924A;  --gold-2:#E8D3A0;  --gold-3:#9C7A32;
+  --white:#FFFFFF;
+  --r:34px;  --r-pill:999px;
+  --shadow:0 18px 60px rgba(60,58,50,.12);   /* sombra neutra, nunca marrom */
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+Regra: proibido marrom em qualquer elemento. Para contraste use --ink; para destaque use dourado.
+2.2 Fundos (alternar bege claríssimo e cinza claro)
+Hero: linear-gradient(180deg,var(--bg-sky),var(--bg) 75%). Faixa: dourado metálico. Sessão da gota: --bg-2. Serviços: --bg. Galeria: --bg-2. Sobre: --bg. Instagram: --bg-2. Feedbacks: --bg. Estúdio: --bg-2. Atendimento: --bg. Agendamento: --bg-2. FAQ: --bg. Rodapé: #E6E6E2.
+2.3 Tipografia
+Títulos Cormorant Garamond 500 (itálico nas palavras de destaque). Corpo Jost 300/400. h1 clamp(42px,6.6vw,92px), h2 clamp(34px,5vw,64px), h3 26px, corpo 17px / 1.7. Linhas de até 62 caracteres.
+2.4 Dourado com efeito espelhado
+.au{background:linear-gradient(100deg,#9C7A32 0,#F5E2A8 25%,#B8924A 45%,#FFF3C9 55%,#B8924A 70%,#9C7A32);
+  background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:sheen 6s linear infinite;font-style:italic}
+@keyframes sheen{to{background-position:-300% 0}}
+Usar .au nas palavras de destaque dos títulos. Também no brilho da faixa, nos botões e em fios finos de 1px.
+2.5 Componentes
+.btn{display:inline-block;padding:16px 38px;border-radius:var(--r-pill);border:1px solid var(--gold);color:var(--ink);
+  font:500 15px Jost;letter-spacing:.05em;text-decoration:none;cursor:pointer;
+  background:linear-gradient(110deg,#F0DFAE,#C9A25A 45%,#F0DFAE 60%,#C9A25A);background-size:240% 100%;
+  transition:background-position .7s var(--ease),transform .3s var(--ease)}
+.btn:hover{background-position:100% 0;transform:translateY(-2px)}
+.btn.o{background:rgba(255,255,255,.7)}
+.glass{background:rgba(255,255,255,.62);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.9);box-shadow:var(--shadow)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+Botões magnéticos e cursor dourado com rastro apenas em (hover:hover).
+3. Stack
+• HTML5 semântico, CSS moderno e JavaScript. GSAP 3 + ScrollTrigger e Lenis por CDN com versão fixa. A animação da gota usa scroll nativo e requestAnimationFrame (código da sessão 8.3), sem depender de bibliotecas.
+• Arquivos: index.html, styles.css, app.js, config.js e /img. Imagens em WebP, loading=lazy abaixo da dobra, fetchpriority=high na foto do hero.
+• Metas: LCP abaixo de 2,5 s em 4G, Lighthouse mobile acima de 90.
+• prefers-reduced-motion: a gota não anima (mostrar o rosto já rejuvenescido), sem faixa em movimento e sem partículas.
+4. Estrutura
+1. Navegação e globais
+2. Hero
+3. Faixa dourada
+4. Animação da gota (transformação)
+5. Serviços
+6. Galeria
+7. Sobre a profissional (frase entre aspas)
+8. Instagram com Reels
+9. Feedbacks
+10. Estúdio e localização
+11. Atendimento (educativa)
+12. Agendamento (simulador e formulário)
+13. FAQ
+14. Rodapé
+5. config.js (todo o conteúdo variável)
+export const SITE = {
+  doutora:{ nome:'Dra. [NOME]', cidade:'[CIDADE]', registro:'[CRO/CRM Nº]', instagram:'[usuario]', whatsapp:'55[DDD][NUMERO]' },
+  hero:{
+    titulo:'Rejuvenescer sem perder quem você é.',
+    destaque:'quem você é.',
+    cargos:['Cirurgiã-dentista','Especialista em Harmonização Facial','Professora'],   // [AJUSTAR AOS CARGOS REAIS]
+    subtitulo:'Harmonização facial com técnica refinada, olhar artístico e resultado natural, em [CIDADE].',
+    cards:['Resultado natural','Avaliação personalizada','+5 anos de experiência'],
+    foto:'img/doutora.webp'
+  },
+  faixa:['Beauty','Harmonia','Naturalidade','Elegância','Cuidado','Confiança'],
+  gota:{
+    antes:'img/rosto-envelhecido.webp', depois:'img/rosto-rejuvenescido.webp',      // mesmo enquadramento, mesma dimensão
+    impacto:{x:.46,y:.60},                                                         // ponto de impacto dentro do círculo (0 a 1)
+    titulo:'Uma gota, e a pele recupera o viço',
+    subtitulo:'Role e veja o ácido hialurônico agir. Cada região do rosto pede uma técnica, e o plano é feito sob medida para você.',
+    anel:'FULL FACE ✦ PREENCHIMENTO LABIAL ✦ PREENCHIMENTO DE MENTO ✦ BOTOX ✦ PREENCHIMENTO DE OLHEIRA ✦ '
+  },
+  servicos:[
+    { id:'labial', nome:'Preenchimento labial', foto:'img/s-labial.webp', foco:'44% 56%', zoom:600,
+      descricao:'Contorno, volume e hidratação na medida do seu rosto, respeitando a proporção entre os lábios.',
+      beneficio:'Lábios mais jovens, hidratados e simétricos, com acabamento natural.' },
+    { id:'mento', nome:'Preenchimento de mento', foto:'img/s-mento.webp', foco:'37% 67%', zoom:600,
+      descricao:'Projeta e alinha o queixo para equilibrar o perfil e a harmonia com nariz e mandíbula.',
+      beneficio:'Mais expressão e definição, perfil equilibrado e contorno elegante.' },
+    { id:'full', nome:'Full face', foto:'img/s-full.webp', foco:'56% 62%', zoom:260,
+      descricao:'Planejamento completo do rosto, combinando técnicas para rejuvenescer com coerência entre todas as regiões.',
+      beneficio:'Rosto harmônico e descansado, com resultado integrado e natural.' },
+    { id:'botox', nome:'Botox', foto:'img/s-botox.webp', foco:'66% 64%', zoom:500,
+      descricao:'Relaxa a musculatura das linhas de expressão da testa e do olhar, sem congelar a sua expressão.',
+      beneficio:'Olhar mais leve, prevenção de novas marcas e resultado em poucos dias.' },
+    { id:'olheira', nome:'Preenchimento de olheira', foto:'img/s-olheira.webp', foco:'58% 63%', zoom:600,
+      descricao:'Suaviza a sombra e o aspecto de cansaço sob os olhos, devolvendo luz e frescor ao olhar.',
+      beneficio:'Olhar descansado, rosto mais iluminado e aparência fresca.' }
+  ],
+  galeria:[ {src:'img/g1.webp',legenda:'Preenchimento labial'} /* 8 a 10 itens */ ],
+  sobre:{ titulo:'Beleza é única. O cuidado também.', subtitulo:'Conheça a [Dra. NOME], especialista em harmonização facial em [CIDADE].',
+          frase:'Meu trabalho não é mudar você. É revelar a melhor versão do que já é seu.',
+          emocional:'Acredito que nenhum rosto precisa ser copiado. Cada traço conta uma história, e o meu trabalho é revelar o que já existe em você, com delicadeza e escuta. Quando uma paciente se olha no espelho e se reconhece, mais descansada, mais confiante e ainda assim ela mesma, sei que fiz meu papel. Aqui você não é um procedimento: é uma pessoa com expectativas, receios e um jeito único de ser bonita.',
+          tecnico:'Sou [formação] pela [INSTITUIÇÃO], com pós-graduação em [ESPECIALIZAÇÃO] e mais de 5 anos de experiência em harmonização facial. Também sou professora de [CURSO], o que me mantém atualizada em anatomia, protocolos de segurança e materiais de ponta. Cada plano é desenhado a partir de análise facial, respeitando proporções, saúde da pele e os seus objetivos.',
+          numeros:[{v:5,suf:'+',rot:'anos de experiência'},{v:800,suf:'+',rot:'pacientes atendidas'},{v:5,suf:'.0',rot:'avaliação média'}], foto:'img/doutora2.webp' },
+  instagram:{ video:'img/reel.mp4', embedId:'' },
+  feedbacks:[ {nome:'Mariana S.',servico:'Preenchimento labial',texto:'[Depoimento real e autorizado]'} /* mínimo 8 */ ],
+  estudio:{ fotos:[], endereco:'[ENDEREÇO]', horario:'[HORÁRIO]', mapsEmbed:'[URL do embed]', mapsLink:'', wazeLink:'' },
+  simulador:{ antes:'img/rosto-envelhecido.webp', depois:'img/rosto-rejuvenescido.webp',
+    regioes:{ labios:[44,56,8,7], queixo:[38,67,10,9], olhos:[58,62,9,6], full:[56,66,28,36] } },   // x, y, raio x, raio y (em % da foto)
+  faq:[ {p:'Fico com aspecto artificial?',r:'Não. O objetivo é harmonia e naturalidade, respeitando os seus traços.'} /* 8 a 10 */ ],
+  analytics:{ ga4:'', pixel:'' }
+};
+6. Navegação e elementos globais
+• Nav em pílula de vidro flutuante (position:fixed, top:12px, largura min(92%,900px)): nome da doutora e botão Agendar. No celular, menu em tela cheia com cortina. Respeitar env(safe-area-inset-top).
+• WhatsApp flutuante (60px, canto inferior direito, pulso suave, env(safe-area-inset-bottom)). Mensagem: Olá! Vim pelo site e gostaria de saber mais.
+• Barra de progresso dourada de 2px no topo. Títulos revelados por linha. Entrada das sessões com fade e subida de 24px (classe .rv).
+const wa=t=>`https://wa.me/${SITE.doutora.whatsapp}?text=${encodeURIComponent(t)}`;
+document.querySelectorAll('.rv').forEach(el=>new IntersectionObserver(([e],o)=>{
+  if(e.isIntersecting){el.classList.add('v');o.disconnect()}},{threshold:.15}).observe(el));
+/* .rv{opacity:0;transform:translateY(24px);transition:opacity 1s,transform 1s} .rv.v{opacity:1;transform:none} */
+7. Princípios de animação
+Uma assinatura por sessão, não efeitos em tudo. Fluidez antes de quantidade: tudo a 60 fps no celular. Animações de scroll reversem quando a pessoa rola para cima. Nunca bloquear cliques com elementos decorativos (pointer-events:none). Respeitar prefers-reduced-motion.
+8. Sessões em detalhe
+8.1 Hero (título, cargos, foto da doutora)
+• Título (impactante): Rejuvenescer sem perder quem você é. (a última parte em .au).
+• Cargos da doutora, em uma linha elegante logo abaixo do título, em cartão de vidro em pílula, separados por ✦: por exemplo, Cirurgiã-dentista ✦ Especialista em Harmonização Facial ✦ Professora. Os cargos vêm de SITE.hero.cargos.
+• Subtítulo: Harmonização facial com técnica refinada, olhar artístico e resultado natural, em [CIDADE].
+• Cartões de vidro em pílula (3): Resultado natural, Avaliação personalizada, +5 anos de experiência.
+• Botões: Agendar minha avaliação (dourado) e Ver serviços (vidro). Não colocar esboço grátis nem qualquer oferta da Glow.
+• Foto da doutora ao lado do texto: em arco (topo semicircular, base com cantos de 34px), borda branca de 6px, moldura dourada fina deslocada 18px atrás, e dois cartões de vidro flutuantes com movimento lento de sobe e desce (use frases como Resultado natural e Atendimento personalizado). Sem círculos girando em volta.
+• Mobile (até 820px): a foto vem antes do texto, em 78% da largura (order:-1).
+• Entrada: foto abre do centro em arco, título revelado por linha, cargos e cartões em sequência.
+.hero{padding:140px 24px 90px;min-height:100svh;overflow:hidden;background:linear-gradient(180deg,var(--bg-sky),var(--bg) 75%)}
+.hero .in{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+.cargos{display:inline-flex;flex-wrap:wrap;gap:6px 14px;padding:10px 22px;border-radius:var(--r-pill);font-size:14px;margin:0 0 20px}
+.cargos span+span::before{content:'✦';color:var(--gold);margin-right:14px}
+.doc{position:relative;width:min(100%,410px);justify-self:center}
+.doc::before{content:'';position:absolute;inset:18px -18px -18px 18px;border:1px solid var(--gold);border-radius:999px 999px var(--r) var(--r)}
+.doc__photo{position:relative;z-index:2;aspect-ratio:4/5;border-radius:999px 999px var(--r) var(--r);border:6px solid #fff;
+  background:center top/cover var(--foto);box-shadow:var(--shadow)}
+.fl{position:absolute;z-index:3;padding:12px 18px;border-radius:40px;font-size:14px;animation:bob 6s ease-in-out infinite}
+.fl.a{left:-26px;bottom:18%}.fl.b{right:-22px;top:14%;animation-delay:-3s}
+@keyframes bob{50%{transform:translateY(-10px)}}
+@media(max-width:820px){.hero{padding-top:110px}.hero .in{grid-template-columns:1fr}.doc{order:-1;width:min(78%,320px)}.fl.a{left:-8px}.fl.b{right:-8px}}
+8.2 Faixa dourada
+Faixa logo abaixo do hero, em dourado metálico com brilho espelhado passando e palavras em itálico serifado grafite (Beauty, Harmonia, Naturalidade, Elegância, Cuidado, Confiança) separadas por ✦. Rolagem horizontal contínua, pausa no hover. A faixa fica logo acima da sessão da gota: a gota nasce na borda inferior dela.
+.band{position:relative;z-index:3;overflow:hidden;white-space:nowrap;padding:16px 0;
+  background:linear-gradient(100deg,#C9A25A,#F3E3B2 30%,#C9A25A 55%,#F3E3B2 80%,#C9A25A);background-size:300% 100%;animation:sheen 12s linear infinite}
+.band__t{display:inline-block;animation:slide 34s linear infinite;font:italic 500 32px 'Cormorant Garamond',serif}
+.band__t span{padding:0 28px}@keyframes slide{to{transform:translateX(-50%)}}
+.band:hover .band__t{animation-play-state:paused}
+8.3 Animação da gota (assinatura do site)
+Conceito: a sessão 2 tem altura de 340vh e um palco fixo (position:sticky) de 100svh. Uma gota de gel de ácido hialurônico nasce grudada na divisão entre a faixa dourada e o palco (uma pequena bolha que cresce e desce enquanto a pessoa rola), forma um pescoço, se solta e cai até a bochecha da mulher. Do ponto do impacto, a pele se transforma em círculo (do rosto envelhecido para o rejuvenescido). Tudo é ligado ao scroll e reverte quando a pessoa rola para cima.
+Composição (desktop): duas colunas. Texto à esquerda (título, subtítulo e botão Ver serviços). À direita, as fotos dentro de um círculo com borda branca, e em volta dele um anel de palavras girando devagar (Full face, Preenchimento labial, Preenchimento de mento, Botox, Preenchimento de olheira) com um fio dourado fino entre o anel e o círculo. Mobile: o círculo vem primeiro (order:-1, --O:min(86vw,50svh)) e o texto embaixo, para a gota não passar por cima do título.
+Fotos (obrigatório): duas imagens do mesmo rosto, no mesmo enquadramento e com a mesma dimensão (proporção 16:9, por exemplo 2576x1438): mulher deitada com o rosto virado para cima em fundo branco, uma com a pele envelhecida (antes) e outra rejuvenescida (depois). Elas ficam recortadas no círculo com background-size:250% auto e background-position:55% 100%, enquadrando do lábio até a testa. Em produção, usar fotos reais e autorizadas. As imagens de exemplo geradas por IA não podem ir ao ar nos sites finais.
+<div id='s2'><div class='stg' id='stg'>
+  <div class='tx'>
+    <h2>Uma gota, e a pele <span class='au'>recupera o viço</span></h2>
+    <p class='sub'>Role e veja o ácido hialurônico agir. Cada região do rosto pede uma técnica, e o plano é feito sob medida para você.</p>
+    <a class='btn' href='#servicos'>Ver serviços</a>
+  </div>
+  <div class='orbit' id='orbit'>
+    <svg class='rsvg' viewBox='0 0 400 400' aria-hidden='true'>
+      <defs><path id='rp' d='M200,200 m-185,0 a185,185 0 1,1 370,0 a185,185 0 1,1 -370,0'/></defs>
+      <circle cx='200' cy='200' r='164'/>
+      <text><textPath href='#rp' textLength='1150' lengthAdjust='spacing'>FULL FACE ✦ PREENCHIMENTO LABIAL ✦ PREENCHIMENTO DE MENTO ✦ BOTOX ✦ PREENCHIMENTO DE OLHEIRA ✦ </textPath></text>
+    </svg>
+    <div class='circ' id='circ' role='img' aria-label='Rosto antes e depois'>
+      <div class='ph'></div><div class='ph y' id='yc'></div><i id='front'></i><span class='lb glass' id='lb'>Antes</span>
+    </div>
+  </div>
+  <svg id='fx' aria-hidden='true'>
+    <defs>
+      <radialGradient id='gg' cx='.35' cy='.3' r='.9'><stop offset='0' stop-color='#fff'/><stop offset='.45' stop-color='#F7E6B0'/><stop offset='1' stop-color='#CFA650'/></radialGradient>
+      <filter id='ds' x='-50%' y='-50%' width='200%' height='200%'><feDropShadow dx='0' dy='6' stdDeviation='5' flood-color='#8A6A2E' flood-opacity='.35'/></filter>
+    </defs>
+    <path id='hang' fill='url(#gg)' stroke='#fff' stroke-opacity='.85' stroke-width='1.5' filter='url(#ds)'/>
+    <path id='fall' fill='url(#gg)' stroke='#fff' stroke-opacity='.85' stroke-width='1.5' filter='url(#ds)'/>
+    <ellipse id='hl' fill='#fff' opacity='.8'/>
+  </svg>
+  <div id='rip' aria-hidden='true'><i style='--m:220'></i><i style='--m:380'></i><i style='--m:560'></i></div>
+</div></div>
+#s2{height:340vh;position:relative}
+.stg{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--bg-2);display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;padding:0 5vw}
+.orbit{--O:min(46vw,76svh);position:relative;width:var(--O);aspect-ratio:1;justify-self:center}
+.rsvg{position:absolute;inset:0;width:100%;height:100%;animation:spin 90s linear infinite}
+.rsvg text{font:500 12.5px Jost;fill:#B8924A;letter-spacing:1px}.rsvg circle{fill:none;stroke:#B8924A;stroke-width:.6;opacity:.55}
+@keyframes spin{to{transform:rotate(360deg)}}
+.circ{position:absolute;inset:13%;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 30px 80px rgba(60,58,50,.28);background:#FDFDFC}
+.ph{position:absolute;inset:0;background:var(--antes) 55% 100%/250% auto no-repeat}
+.ph.y{background-image:var(--depois);clip-path:circle(0% at 46% 60%)}
+#front{position:absolute;left:46%;top:60%;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;
+  border:2px solid rgba(240,220,150,.95);box-shadow:0 0 22px 4px rgba(232,200,120,.7),inset 0 0 24px rgba(255,248,220,.6)}
+.lb{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);padding:5px 16px;border-radius:30px;font-size:13px;z-index:3}
+#fx{position:absolute;inset:0;width:100%;height:100%;z-index:6;pointer-events:none;overflow:visible}
+.sp{position:absolute;left:0;top:0;width:9px;height:11px;margin:-5px;opacity:0;pointer-events:none;z-index:6;
+  border-radius:50% 50% 50% 50%/62% 62% 38% 38%;background:radial-gradient(circle at 35% 30%,#fff,#F0D58A 60%,#C9A25A)}
+#rip{position:absolute;z-index:5;pointer-events:none;--k:0}
+#rip i{position:absolute;border:1.5px solid rgba(184,146,74,.85);border-radius:50%;transform:translate(-50%,-50%);
+  width:calc(var(--k)*var(--m)*1px);height:calc(var(--k)*var(--m)*.42px);opacity:calc(1 - var(--k))}
+@media(max-width:820px){.stg{grid-template-columns:1fr;align-content:center;padding:70px 20px 0;gap:6px;text-align:center}
+  .orbit{--O:min(86vw,50svh);order:-1}.stg .tx h2{font-size:30px}.stg .tx .sub{font-size:14.5px;margin-bottom:14px}}
+Linha do tempo (p = progresso do scroll dentro da sessão fixa; a = a pessoa se aproximando da divisão):
+• a de 0,45 a 1 (antes de fixar): a bolha de gel cresce na borda inferior da faixa, ganhando comprimento (8 a 105px) e largura, ainda grudada na divisão, com um filete largo na base (a “emenda”).
+• p de 0 a 0,10: a gota continua pendurada, incha e o pescoço afina.
+• p em 0,10: o pescoço se rompe. Uma gotinha residual se recolhe na divisão e a gota principal se solta.
+• p de 0,10 a 0,40: queda com aceleração (posição proporcional a k ao quadrado) até o ponto de impacto na bochecha, esticando (até +55%) enquanto cai, com reflexo branco acompanhando.
+• p em 0,40: impacto. A gota some, 9 gotículas espirram em arco, 3 ondas elípticas douradas se expandem.
+• p de 0,40 a 0,76: o rosto rejuvenescido se revela em círculo (clip-path:circle) a partir do ponto de impacto, com um anel de luz dourada na frente da revelação. O rótulo passa de Antes para Depois.
+• p acima de 0,76: estado final; o palco continua fixo até o fim da sessão e depois segue para os serviços.
+const $=s=>document.querySelector(s);
+const c2=$('#s2'),stg=$('#stg'),circ=$('#circ'),hang=$('#hang'),fall=$('#fall'),hl=$('#hl'),front=$('#front'),yc=$('#yc'),rip=$('#rip'),lb=$('#lb');
+const IX=SITE.gota.impacto.x, IY=SITE.gota.impacto.y;
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const ez=t=>t*t*(3-2*t), cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+
+// partículas do respingo
+const SP=[...Array(9)].map((_,i)=>{const d=document.createElement('i');d.className='sp';stg.appendChild(d);
+  return{d,a:Math.PI*(.12+.76*i/8),v:50+(i%3)*22}});
+
+// gota pendurada: filete largo na divisão (fl), pescoço (nw) e bulbo (bw) até o comprimento L
+const hangPath=(x,L,nw,bw)=>{if(L<2)return'';const fl=nw+26,by=Math.max(L-bw,2);
+  return `M${x-fl} 0C${x-nw-4} 3 ${x-nw} ${L*.1} ${x-nw} ${L*.3}C${x-nw} ${L*.55} ${x-bw} ${L*.5} ${x-bw} ${by}`+
+         `A${bw} ${bw} 0 0 0 ${x+bw} ${by}C${x+bw} ${L*.5} ${x+nw} ${L*.55} ${x+nw} ${L*.3}C${x+nw} ${L*.1} ${x+nw+4} 3 ${x+fl} 0Z`};
+// gota em queda: ponta para cima, esticada por s
+const dropPath=(x,y,r,s)=>`M${x} ${y-r*1.9*s}C${x+r*.15} ${y-r*s} ${x+r} ${y-r*.5} ${x+r} ${y}A${r} ${r} 0 0 1 ${x-r} ${y}C${x-r} ${y-r*.5} ${x-r*.15} ${y-r*s} ${x} ${y-r*1.9*s}Z`;
+
+function tick(){
+  const r=c2.getBoundingClientRect();
+  const a=cl(1-r.top/innerHeight);                                    // aproximação da divisão
+  const p=still?1:cl(-r.top/(r.height-innerHeight));                  // progresso dentro do palco fixo
+  const s=stg.getBoundingClientRect(), cb=circ.getBoundingClientRect();
+  const ix=cb.left-s.left+IX*cb.width, iy=cb.top-s.top+IY*cb.height; // ponto de impacto no palco
+  let L=0,nw=15,bw=9;
+  if(still){hang.setAttribute('d','');fall.setAttribute('d','');hl.setAttribute('rx',0)}
+  else{
+    if(p<=0){const k=ez(cl((a-.45)/.55));L=8+k*97;bw=8+k*18;nw=15-k*3}
+    else if(p<.1){const k=p/.1;L=105+k*30;bw=26+k*6;nw=12-k*9}
+    else{const k=ez(cl((p-.1)/.05));L=(1-k)*40;bw=7;nw=7*(1-k)+2}   // resto recolhendo
+    hang.setAttribute('d',hangPath(ix,L,nw,bw));
+    let fy=0,fr=0,fs=1;
+    if(p>=.1&&p<.43){const k=cl((p-.1)/.3),y0=104;fy=y0+(iy-y0)*k*k;fr=32*(1-.1*k);fs=1+.55*k;if(p>=.4)fr*=1-(p-.4)/.03}
+    if(fr>0){fall.setAttribute('d',dropPath(ix,fy,fr,fs));
+      hl.setAttribute('cx',ix-fr*.35);hl.setAttribute('cy',fy-fr*.15);hl.setAttribute('rx',fr*.16);hl.setAttribute('ry',fr*.42)}
+    else{fall.setAttribute('d','');hl.setAttribute('rx',0)}
+  }
+  // ondas e respingo no impacto
+  rip.style.left=ix+'px';rip.style.top=iy+'px';rip.style.setProperty('--k',still||p<.4||p>.62?0:cl((p-.4)/.2));
+  SP.forEach(o=>{const t=cl((p-.4)/.1);if(still||t<=0||t>=1){o.d.style.opacity=0;return}
+    o.d.style.opacity=1-t;o.d.style.transform=`translate(${ix+Math.cos(o.a)*o.v*t*1.4}px,${iy-Math.sin(o.a)*o.v*t*1.5+t*t*70}px)`});
+  // transformação em círculo a partir do impacto
+  const R=Math.hypot(cb.width,cb.height), rk=still?1:ez(cl((p-.4)/.36));
+  yc.style.clipPath=`circle(${rk*R}px at ${IX*100}% ${IY*100}%)`;
+  front.style.width=front.style.height=(2*rk*R)+'px';front.style.opacity=rk>0&&rk<.98?1:0;
+  lb.textContent=rk>.5?'Depois':'Antes';
+}
+addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);addEventListener('load',tick);tick();
+Definição das imagens por CSS: no :root, --antes:url(...) e --depois:url(...) com os caminhos de SITE.gota. O ponto de impacto (SITE.gota.impacto) deve cair sobre a bochecha na foto recortada; ajuste x e y se trocar a foto.
+Melhorias esperadas: suavizar o pescoço com uma curva mais orgânica, adicionar uma leve refração (mini cópia da foto distorcida dentro da gota), acelerar o respingo com física simples, tocar um brilho passando pelo anel de palavras no impacto e garantir que a gota nunca cubra o título no celular.
+Aceite da gota: (1) a bolha aparece grudada na divisão ao chegar na sessão; (2) cresce, forma pescoço e se solta; (3) cai até a bochecha sem passar por cima do título no celular; (4) respingo e ondas no impacto; (5) o rosto se transforma em círculo a partir do impacto, com anel de luz; (6) rolando para cima tudo reverte; (7) 60 fps no celular intermediário; (8) com prefers-reduced-motion, o rosto aparece já rejuvenescido, sem gota.
+8.4 Serviços com maré de gotas
+• Entrada: logo após a transformação, ondas douradas em 3 camadas sobem sobre a base do palco (ligadas ao scroll) e cerca de 14 gotas de gel de tamanhos diferentes sobem devagar no fundo (máximo de 8 no celular).
+• Título: Nossos serviços. Subtítulo: Toque em um serviço e veja os benefícios.
+• 5 serviços em cartões de vidro (minmax(230px,1fr)) que flutuam suavemente: foto (recorte do rosto pelo ponto de foco), nome, descrição de 2 a 3 linhas e Ver benefícios +. Ao tocar, nasce uma onda dourada a partir do ponto do toque e os benefícios se abrem (um por vez). Depois: botão Conhecer mais serviços (contorno; abre o WhatsApp com Olá! Gostaria de conhecer os demais serviços) e o botão dourado Agendar avaliação.
+<section id='servicos' class='sec svs'>
+  <div class='tide' id='tide' aria-hidden='true'>
+    <svg viewBox='0 0 1440 150' preserveAspectRatio='none'><path d='M0 70Q90 20 180 70T360 70T540 70T720 70T900 70T1080 70T1260 70T1440 70V150H0Z' fill='rgba(232,211,160,.35)'/></svg>
+    <svg viewBox='0 0 1440 150' preserveAspectRatio='none'><path d='M0 90Q90 50 180 90T360 90T540 90T720 90T900 90T1080 90T1260 90T1440 90V150H0Z' fill='rgba(240,223,174,.6)'/></svg>
+    <svg viewBox='0 0 1440 150' preserveAspectRatio='none'><path d='M0 112Q90 80 180 112T360 112T540 112T720 112T900 112T1080 112T1260 112T1440 112V150H0Z' fill='#FCFAF5'/></svg>
+  </div>
+  <div id='dps'></div>
+  <div class='in c'><h2 class='rv'>Nossos <span class='au'>serviços</span></h2> ... <div class='grid' id='sv'></div></div>
+</section>
+.svs{z-index:7;overflow:visible;background:var(--bg)}
+.tide{position:absolute;left:0;right:0;top:-110px;height:150px;pointer-events:none;overflow:hidden;transform:translateY(calc((1 - var(--tp,0))*70px))}
+.tide svg{position:absolute;bottom:0;left:0;width:200%;height:100%;animation:wv 14s linear infinite}
+.tide svg:nth-child(2){animation-duration:19s;animation-direction:reverse}.tide svg:nth-child(3){animation-duration:24s}
+@keyframes wv{to{transform:translateX(-50%)}}
+#dps{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.dp{position:absolute;bottom:-70px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;animation:rise linear infinite;
+  background:radial-gradient(circle at 35% 30%,#fff,rgba(232,211,160,.55) 55%,rgba(184,146,74,.25));box-shadow:0 6px 18px rgba(184,146,74,.25)}
+@keyframes rise{to{transform:translateY(-120vh) translateX(var(--sw))}}
+.svc{border-radius:var(--r);overflow:hidden;position:relative;cursor:pointer;text-align:left;padding:0;border:0;animation:bob 7s ease-in-out infinite}
+.svc:nth-child(even){animation-delay:-3.5s}.pic{height:200px;background:var(--depois) no-repeat}
+.bn{max-height:0;overflow:hidden;transition:max-height .5s;color:var(--gold-3);font-size:14.5px}.svc.open .bn{max-height:140px}
+.rpl{position:absolute;width:10px;height:10px;margin:-5px;border-radius:50%;border:2px solid var(--gold);pointer-events:none;animation:rpl .9s ease-out forwards}
+@keyframes rpl{to{transform:scale(40);opacity:0}}
+@media(max-width:820px){.dp:nth-child(n+9){display:none}.tide{top:-90px;height:120px}}
+const tide=$('#tide'),sv=$('#servicos');
+function tp(){const r=sv.getBoundingClientRect();tide.style.setProperty('--tp',cl(1-(r.top-innerHeight*.2)/(innerHeight*.9)))}
+addEventListener('scroll',tp,{passive:true});tp();
+for(let i=0;i<14;i++){const d=document.createElement('i'),z=10+Math.random()*34;d.className='dp';
+  d.style.cssText=`left:${Math.random()*96}%;width:${z}px;height:${z*1.25}px;animation-duration:${12+Math.random()*14}s;animation-delay:${-Math.random()*20}s;opacity:${.35+Math.random()*.5};--sw:${(Math.random()-.5)*120}px`;
+  $('#dps').appendChild(d)}
+SITE.servicos.forEach(s=>{const b=document.createElement('button');b.className='svc glass rv';
+  b.innerHTML=`<div class='pic' style='background-size:${s.zoom}%;background-position:${s.foco}'></div><div class='t'><h3>${s.nome}</h3><p>${s.descricao}</p><span class='mo'>Ver benefícios +</span><div class='bn'>${s.beneficio}</div></div>`;
+  b.onclick=e=>{const r=b.getBoundingClientRect(),w=document.createElement('i');w.className='rpl';w.style.left=(e.clientX-r.left)+'px';w.style.top=(e.clientY-r.top)+'px';
+    b.appendChild(w);setTimeout(()=>w.remove(),900);document.querySelectorAll('.svc.open').forEach(o=>o!==b&&o.classList.remove('open'));b.classList.toggle('open')};
+  $('#sv').appendChild(b)});
+8.5 Galeria (estática)
+• Título: O cuidado, em cada detalhe. Subtítulo: Rostos reais, resultados naturais, sempre com autorização das pacientes.
+• Mosaico assimétrico de 8 a 10 fotos (4 colunas, alguns itens ocupam 2 linhas ou 2 colunas). Sem varinha, sem gota, sem comparador e sem texto de antes e depois. Hover: zoom de 3% e legenda; clique abre visualização ampliada com setas e swipe. Entrada das fotos por máscara com atrasos escalonados.
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:14px}
+.gal figure{margin:0;border-radius:24px;overflow:hidden}.gal img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figure:nth-child(1),.gal figure:nth-child(6){grid-row:span 2}.gal figure:nth-child(4){grid-column:span 2}
+@media(max-width:820px){.gal{grid-template-columns:1fr 1fr;grid-auto-rows:140px}}
+8.6 Sobre a profissional (com frase entre aspas)
+• Título: Beleza é única. O cuidado também. Subtítulo: Conheça a [Dra. NOME], especialista em harmonização facial em [CIDADE].
+• Frase entre aspas em destaque, acima do texto, em itálico serifado grande com a segunda parte em .au: “Meu trabalho não é mudar você. É revelar a melhor versão do que já é seu.” (vem de SITE.sobre.frase). Um fio dourado fino se desenha ao lado dela ao entrar na tela.
+• Layout: foto da doutora em arco com moldura dourada fina deslocada (como no hero, sem círculos girando) à esquerda, texto à direita. No celular, foto primeiro.
+• Dois parágrafos de 70 a 90 palavras: um emocional (a beleza é única, o cuidado é individual) e um técnico (mais de 5 anos de experiência, formação, pós-graduação, professora), vindos de SITE.sobre.
+• Contadores animados: anos de experiência, pacientes atendidas e avaliação média, que sobem ao entrar na tela. Botão: Agendar com a [Dra. NOME].
+document.querySelectorAll('[data-count]').forEach(el=>{const end=+el.dataset.count;
+  new IntersectionObserver(([e],o)=>{if(!e.isIntersecting)return;o.disconnect();
+    const t0=performance.now();(function f(n){const k=Math.min(1,(n-t0)/1600);
+      el.textContent=Math.round(end*(1-Math.pow(1-k,3)))+(el.dataset.suf||'');if(k<1)requestAnimationFrame(f)})(t0)},{threshold:.6}).observe(el)});
+8.7 Instagram com Reels integrado, sem capa
+• Título: Acompanhe o dia a dia no Instagram. Subtítulo: Bastidores, cuidados e resultados reais, sem sair daqui.
+• Sem capa: use o arquivo do Reels (MP4 vertical 9:16, até 8 MB) em <video autoplay muted loop playsinline preload='metadata'> que começa a tocar direto ao entrar na tela e pausa ao sair. Botão de som. Moldura de celular em vidro fosco (cantos de 44px, borda fina dourada). Fallback: iframe oficial instagram.com/reel/ID/embed.
+• Botão: Seguir @[usuario] no Instagram (nova aba).
+const v=document.querySelector('#reel');
+new IntersectionObserver(([e])=>e.isIntersecting?v.play():v.pause(),{threshold:.5}).observe(v);
+document.querySelector('#sound').onclick=()=>{v.muted=!v.muted};
+8.8 Feedbacks
+• Título: Quem confiou, voltou a se amar. Subtítulo: Relatos de pacientes sobre o cuidado e o resultado.
+• Mínimo de 8 depoimentos em carrossel horizontal com arraste (mouse e toque) e setas; 3 por vez no desktop. Cada um com 5 estrelas douradas em SVG que se preenchem em sequência quando o cartão entra na tela, 2 a 3 frases, nome e serviço. Cartões brancos com cantos de 34px. Usar somente depoimentos reais e autorizados. Botão: Marcar minha avaliação.
+<svg class='star' viewBox='0 0 24 24'><path d='M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z' fill='#B8924A'/></svg>
+8.9 Estúdio e localização
+• Título: Um espaço pensado para o seu bem-estar. Subtítulo: Privacidade, conforto e biossegurança em cada detalhe da sua visita.
+• Fotos do espaço: colagem assimétrica de 4 a 6 imagens (uma grande), entrada por máscara.
+• Como chegar: Google Maps integrado por <iframe loading='lazy'> dentro de um cartão de vidro com cantos de 34px, com endereço e horário, e três botões: Abrir no Google Maps, Abrir no Waze e Chamar Uber. Dica de ajuda: estacionamento, ponto de referência e acessibilidade. Botão: Agendar minha visita.
+8.10 Atendimento (educativa)
+• Título: Seu atendimento começa antes da consulta. Subtítulo: Em poucos passos, nossa equipe entende o que te incomoda e prepara o melhor plano.
+• Linha do tempo com fio dourado que se desenha ao rolar (stroke-dashoffset) e acende cada etapa: 1) Conte o que incomoda, com suas palavras, sem pressa. 2) Envie uma foto (guia: luz natural de frente para a janela, rosto limpo e sem maquiagem, cabelo preso, três ângulos, expressão neutra e uma sorrindo). 3) Receba a orientação inicial da equipe. 4) Venha para a avaliação presencial.
+• Expectativas: o objetivo é realçar, não transformar; existe plano em etapas; a avaliação define o que é seguro. Botão: Enviar minha foto para análise (leva ao agendamento).
+gsap.fromTo('#tl path',{strokeDashoffset:1},{strokeDashoffset:0,ease:'none',
+  scrollTrigger:{trigger:'#atendimento',start:'top 70%',end:'bottom 60%',scrub:.4}});
+8.11 Agendamento: simulador e formulário
+Esta sessão substitui o quiz. Fica depois do atendimento.
+• Título: Veja o que você quer realçar. Subtítulo: Toque nas opções e veja uma simulação ilustrativa. Depois monte sua mensagem e fale com a equipe.
+• Simulador: um cartão largo (proporção igual à das fotos, 16:9) com a foto envelhecida embaixo e, por cima, camadas com a foto rejuvenescida recortadas por máscaras elípticas (mask-image com radial-gradient) em cada região: lábios, queixo, olhos e rosto todo (SITE.simulador.regioes). Opções em pílula, que podem ser ligadas e desligadas: Mais boca, Mais queixo, Olhar descansado, Rejuvenescer tudo. Um controle de intensidade ajusta a opacity das camadas. Uma linha de varredura dourada desce pelo rosto uma vez quando a sessão entra na tela.
+• Aviso fixo: A simulação é ilustrativa. O resultado real é definido na avaliação.
+• Ao escolher: o serviço do formulário é selecionado e a mensagem de WhatsApp inclui Na simulação do site, quis: mais boca.
+const G=(x,y,rx,ry)=>`radial-gradient(ellipse ${rx}% ${ry}% at ${x}% ${y}%,#000 45%,transparent 100%)`;
+const R=SITE.simulador.regioes;
+const SM=[['Mais boca','Preenchimento labial',G(...R.labios)],['Mais queixo','Preenchimento de mento',G(...R.queixo)],
+  ['Olhar descansado','Preenchimento de olheira',G(...R.olhos)],['Rejuvenescer tudo','Full face',G(...R.full)]];
+const on=new Set(),lay=[];
+SM.forEach((m,i)=>{const o=document.createElement('div');o.className='lay ov';o.style.maskImage=o.style.webkitMaskImage=m[2];
+  sim.insertBefore(o,scan);lay.push(o);
+  const b=document.createElement('button');b.textContent=m[0];
+  b.onclick=()=>{on.has(i)?on.delete(i):on.add(i);b.classList.toggle('on');apply()};opts.appendChild(b)});
+function apply(){const v=it.value/100;lay.forEach((o,i)=>o.style.opacity=on.has(i)?v:0);
+  const l=[...on];if(l.length)servicoSel.value=SM[l[0]][1];updatePreview()}
+it.oninput=apply;
+new IntersectionObserver(([e])=>e.isIntersecting&&sim.classList.add('go'),{threshold:.5}).observe(sim);
+.sim{position:relative;width:min(100%,780px);aspect-ratio:2576/1438;margin:0 auto 20px;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.sim .lay{position:absolute;inset:0;background:center/cover var(--antes)}.sim .ov{background-image:var(--depois);opacity:0;transition:opacity .9s var(--ease)}
+.scn{position:absolute;left:0;right:0;top:0;height:2px;opacity:0;background:linear-gradient(90deg,transparent,#B8924A,transparent);box-shadow:0 0 18px 4px rgba(232,200,120,.6)}
+.go .scn{animation:scan 2.6s}@keyframes scan{0%{top:0;opacity:1}100%{top:100%;opacity:1}}
+Formulário: nome, serviço (select vindo de config, mais Ainda não sei, quero uma avaliação), melhor horário (manhã, tarde, noite) e o que mais incomoda. Mensagem pré-pronta ao vivo em balão verde-claro de WhatsApp, atualizada a cada tecla (aria-live='polite'), com os botões Enviar pelo WhatsApp e Copiar mensagem. Nome obrigatório, com erro claro ao lado do campo.
+function message(){const l=[...on].map(i=>SM[i][0].toLowerCase()).join(', ');
+  return `Olá! Meu nome é ${nome.value||'[seu nome]'}.\nTenho interesse em: ${servicoSel.value}.\nMelhor horário: ${horario.value}.\n`+
+    `O que mais me incomoda: ${queixa.value||'[conte aqui]'}.`+(l?`\nNa simulação do site, quis: ${l}.`:'')+`\nGostaria de enviar uma foto para análise.`}
+function updatePreview(){preview.textContent=message()}
+['input','change'].forEach(e=>form.addEventListener(e,updatePreview));updatePreview();
+send.onclick=()=>{if(!nome.value.trim()){nome.focus();return}track('form_submit');open(wa(message()),'_blank')};
+8.12 FAQ
+Acordeão com <details> estilizado, um item aberto por vez, títulos em serifa. 8 a 10 perguntas: Fico com aspecto artificial? Quanto tempo dura? Dói? Qual o tempo de recuperação? Posso voltar às atividades no mesmo dia? Como sei qual procedimento é para mim? Quem realiza? Quais os cuidados antes e depois? Posso parcelar? Respostas curtas e honestas, sem promessa de resultado. Botão: Tirar minhas dúvidas.
+8.13 Rodapé
+Fundo #E6E6E2 (cinza claro), nome da doutora em dourado, registro profissional, endereço, horário, Instagram, WhatsApp, links âncora e a frase: Resultados variam de pessoa para pessoa. Este site não substitui avaliação profissional. Ano atualizado automaticamente.
+9. Responsividade
+• Breakpoints 480, 820, 1200 e 1600px. Mobile first. Alvos de toque de pelo menos 44px. Nenhuma rolagem horizontal em 320px.
+• min-height:100svh no hero. Respeitar env(safe-area-inset-*) na nav e no WhatsApp flutuante.
+• No celular: foto da doutora antes do texto no hero; círculo antes do texto na sessão da gota; máximo de 8 gotas na maré; grades em 1 ou 2 colunas; carrossel por toque.
+• Efeitos de cursor apenas em (hover:hover). Testar em iPhone SE, iPhone 14, Galaxy S21, iPad e notebook de 1366px.
+10. SEO local, acessibilidade e analytics
+• Um único <h1>, <h2> por sessão, alt descritivo, lang='pt-BR', título e meta description com o nome, a especialidade e a cidade, Open Graph com imagem.
+• Dados estruturados (JSON-LD) Physician ou MedicalBusiness com nome, endereço, telefone, horário e sameAs com o Instagram, e FAQPage com as perguntas do FAQ. Troque as aspas simples por duplas ao gerar o arquivo final.
+• Contraste AA, foco visível dourado, aria-expanded nos acordeões, aria-live na pré-visualização, aria-hidden='true' nos elementos decorativos (gota, anel, ondas).
+• Eventos GA4 e Meta Pixel (track(nome,dados)): clique em Agendar (com a sessão de origem), WhatsApp flutuante, abertura de serviço, uso do simulador, envio do formulário e play do Reels.
+11. Conformidade (profissionais de saúde)
+Respeitar as normas de publicidade do conselho de cada cliente (CFM, CFO, CRBM e outros). Usar somente fotos reais e autorizadas nos sites finais (as imagens de exemplo geradas por IA não podem ir ao ar). Sem promessa de resultado e sem preços promocionais agressivos. Manter o aviso de resultados variáveis na sessão da gota, no simulador e no rodapé. Depoimentos reais, com permissão.
+12. Critérios de aceite
+1. Paleta só bege claríssimo e cinza claro, com dourado espelhado e sem marrom. Sem varinha.
+2. Hero com título impactante, cargos da doutora, subtítulo, cartões e foto da doutora ao lado (antes do texto no celular), sem nenhuma menção a esboço grátis ou à Glow.
+3. A gota nasce grudada na divisão, cai no rosto e transforma a pele em círculo a partir do impacto, e reverte ao rolar para cima.
+4. As fotos ficam dentro de um círculo com um anel de palavras (os serviços) girando em volta.
+5. Exatamente 5 serviços, cada um com foto, nome, descrição e benefícios que abrem; o botão Conhecer mais serviços funciona.
+6. A galeria é estática. O quiz não existe. O simulador funciona e preenche o formulário.
+7. A sessão Sobre tem a frase entre aspas, dois parágrafos (emocional e técnico) e contadores.
+8. O Reels toca direto, sem capa. Os feedbacks têm 5 estrelas douradas. O Maps está integrado.
+9. Todas as sessões têm título, subtítulo e botão de agendar. WhatsApp flutuante presente.
+10. Sem rolagem horizontal em 320px, 60 fps no celular intermediário e Lighthouse mobile acima de 90.
+11. Parece feito sob medida: layout editorial, sem aparência de template genérico.
+13. Assets por cliente
+Foto da doutora (retrato, fundo claro, em duas ângulos se possível); duas fotos do mesmo rosto no mesmo enquadramento (envelhecido e rejuvenescido), 16:9, fundo branco, autorizadas; 5 fotos de serviço (ou recortes); 8 a 10 fotos da galeria; 4 a 6 fotos do estúdio; vídeo do Reels em MP4; endereço, mapa, horário, WhatsApp e Instagram; cargos, formação, frase da doutora e depoimentos reais.
+14. Prompt para colar no Google AI Studio
+Você é um desenvolvedor front-end sênior e diretor de arte. Construa o site descrito neste PRD em index.html, styles.css, app.js e config.js, com GSAP, ScrollTrigger e Lenis por CDN. Este é o site de uma profissional da harmonização facial, não o site da Glow Sites: não coloque esboço grátis nem qualquer oferta de criação de sites. Siga as decisões fechadas da sessão 0, a ordem das sessões da sessão 4 e os códigos como ponto de partida, e melhore: refinamento tipográfico, fluidez, inércia, profundidade nos cartões de vidro, microinterações e acabamento. Use apenas bege claríssimo, cinza claro e dourado espelhado, sem marrom e sem varinha. Implemente a animação da gota da sessão 8.3 exatamente como descrita: a gota nasce grudada na divisão abaixo da faixa dourada, forma pescoço, se solta, cai na bochecha e transforma o rosto em círculo a partir do impacto, tudo ligado ao scroll e reversível, com as fotos dentro de um círculo e o anel de palavras girando em volta. O hero deve ter título impactante, os cargos da doutora e a foto dela ao lado (antes do texto no celular). O resultado deve parecer um site de alto padrão, editorial e sem cara de template. 100% responsivo e rápido. Entregue o código completo e comentado, com as imagens como espaços reservados fáceis de trocar. 
